@@ -1,0 +1,65 @@
+syntax = "proto3";
+package pb;
+
+service AppRuntimeSync {
+  rpc GetAppStatus (ServicesRequest) returns (StatusMessage) {}
+  rpc GetAppPods (ServiceRequest) returns (ServiceAppPodList) {}
+  rpc GetDeployInfo (ServiceRequest) returns (DeployInfo) {}
+  rpc GetTenantResource (TenantRequest) returns (TenantResource) {}
+}
+
+message ServiceRequest { 
+  string service_id = 1;
+}
+message ServicesRequest {
+  string service_ids = 1;
+}
+message TenantRequest {
+  string tenant_id = 1;
+}
+
+message StatusMessage {
+  map<string, string> status = 1;
+}
+
+message DiskMessage {
+  map<string, double> disks = 1;
+}
+
+message ServiceAppPodList {
+  repeated ServiceAppPod pods = 1;
+}
+message ServiceAppPod {
+  string service_id = 1;
+  string deploy_id = 2;
+  string deploy_type = 3;
+  string pod_name = 4;
+  string pod_ip = 5;
+  string pod_status = 6;
+  map<string, Container> containers = 7;
+}
+
+message Container {
+  string container_name = 1;
+  int64 memory_limit = 2;
+}
+
+message DeployInfo {
+  string namespace = 1;
+  string statefuleset = 2;
+  string deployment = 3;
+  map<string, string> pods = 4;
+  map<string, string> services = 5;
+  map<string, string> secrets = 6;
+  map<string, string> ingresses = 7;
+  map<string, string> replicatset = 8;
+  string status = 9;
+}
+
+message TenantResource {
+  int64 cpu_request = 1;
+  int64 cpu_limit = 2;
+  int64 memory_request = 3;
+  int64 memory_limit = 4;
+  int64 running_app_num = 5;
+}

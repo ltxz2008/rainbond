@@ -1,5 +1,5 @@
+// Copyright (C) 2014-2018 Goodrain Co., Ltd.
 // RAINBOND, Application Management Platform
-// Copyright (C) 2014-2017 Goodrain Co., Ltd.
 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -24,17 +24,17 @@ import (
 	"syscall"
 
 	"github.com/goodrain/rainbond/cmd/entrance/option"
-	"github.com/goodrain/rainbond/pkg/discover"
-	"github.com/goodrain/rainbond/pkg/entrance/api"
-	"github.com/goodrain/rainbond/pkg/entrance/cluster"
-	"github.com/goodrain/rainbond/pkg/entrance/core"
-	"github.com/goodrain/rainbond/pkg/entrance/core/sync"
-	"github.com/goodrain/rainbond/pkg/entrance/source"
-	"github.com/goodrain/rainbond/pkg/entrance/store"
+	"github.com/goodrain/rainbond/discover"
+	"github.com/goodrain/rainbond/entrance/api"
+	"github.com/goodrain/rainbond/entrance/cluster"
+	"github.com/goodrain/rainbond/entrance/core"
+	"github.com/goodrain/rainbond/entrance/core/sync"
+	"github.com/goodrain/rainbond/entrance/source"
+	"github.com/goodrain/rainbond/entrance/store"
 
 	"github.com/Sirupsen/logrus"
 
-	"github.com/goodrain/rainbond/pkg/entrance/plugin"
+	"github.com/goodrain/rainbond/entrance/plugin"
 )
 
 //Run start run

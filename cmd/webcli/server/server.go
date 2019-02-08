@@ -1,5 +1,5 @@
+// Copyright (C) 2014-2018 Goodrain Co., Ltd.
 // RAINBOND, Application Management Platform
-// Copyright (C) 2014-2017 Goodrain Co., Ltd.
 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -25,8 +25,8 @@ import (
 	"syscall"
 
 	"github.com/goodrain/rainbond/cmd/webcli/option"
-	"github.com/goodrain/rainbond/pkg/discover"
-	"github.com/goodrain/rainbond/pkg/webcli/app"
+	"github.com/goodrain/rainbond/discover"
+	"github.com/goodrain/rainbond/webcli/app"
 
 	"github.com/Sirupsen/logrus"
 )

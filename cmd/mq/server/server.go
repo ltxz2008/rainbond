@@ -1,5 +1,5 @@
+// Copyright (C) 2014-2018 Goodrain Co., Ltd.
 // RAINBOND, Application Management Platform
-// Copyright (C) 2014-2017 Goodrain Co., Ltd.
 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -24,8 +24,8 @@ import (
 	"syscall"
 
 	"github.com/goodrain/rainbond/cmd/mq/option"
-	"github.com/goodrain/rainbond/pkg/discover"
-	"github.com/goodrain/rainbond/pkg/mq/api"
+	discover "github.com/goodrain/rainbond/discover.v2"
+	"github.com/goodrain/rainbond/mq/api"
 
 	"github.com/Sirupsen/logrus"
 )
@@ -42,6 +42,7 @@ func Run(s *option.MQServer) error {
 	apiManager.Start(errChan)
 	defer apiManager.Stop()
 
+	//step 2:regist mq endpoint
 	keepalive, err := discover.CreateKeepAlive(s.EtcdEndPoints, "rainbond_mq", s.Config.HostName, s.Config.HostIP, s.Config.APIPort)
 	if err != nil {
 		return err
@@ -50,6 +51,16 @@ func Run(s *option.MQServer) error {
 		return err
 	}
 	defer keepalive.Stop()
+
+	//step 3:regist prometheus export endpoint
+	exportKeepalive, err := discover.CreateKeepAlive(s.EtcdEndPoints, "mq", s.Config.HostName, s.Config.HostIP, 6301)
+	if err != nil {
+		return err
+	}
+	if err := exportKeepalive.Start(); err != nil {
+		return err
+	}
+	defer exportKeepalive.Stop()
 
 	//step finally: listen Signal
 	term := make(chan os.Signal)
